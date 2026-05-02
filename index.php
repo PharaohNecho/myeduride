@@ -1,0 +1,304 @@
+<?php
+// MyEduRide - Main Landing Page
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyEduRide - Personal Guardianship</title>
+    
+    <!-- Load Tailwind CSS via CDN for standalone HTML/PHP environments -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#002046',
+                        secondary: '#196d24',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <style>
+        body { background-color: #f7f9fb; color: #191c1e; }
+        .shadow-ambient { box-shadow: 0 4px 20px rgba(27, 54, 93, 0.08); }
+        .btn-transition { transition: all 0.2s ease; }
+    </style>
+    
+    <!-- Load Icon Set -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="font-sans min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="w-full h-20 border-b border-gray-200 bg-[#f7f9fb] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <!-- Replace 'input_file_1.png' with your actual logo filename on cPanel -->
+                <img src="/input_file_1.png" alt="MyEduRide Logo" class="h-12 w-auto object-contain" />
+            </div>
+            
+            <div class="hidden lg:flex items-center gap-6">
+                <div class="flex items-center gap-4 text-xs uppercase tracking-widest font-bold text-primary">
+                    <span class="flex items-center bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100"><i data-lucide="lock" class="w-3 h-3 mr-1.5 text-secondary"></i> Ownership</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                    <span class="flex items-center bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100"><i data-lucide="graduation-cap" class="w-3 h-3 mr-1.5 text-secondary"></i> Edu</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                    <span class="flex items-center bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100"><i data-lucide="bus" class="w-3 h-3 mr-1.5 text-secondary"></i> Ride</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button class="hidden sm:inline-flex text-sm text-[#191c1e] hover:text-primary px-3 py-2 btn-transition font-medium">Login</button>
+                <button class="bg-primary text-white hover:bg-opacity-90 px-5 py-2.5 rounded-md text-sm font-medium btn-transition">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="max-w-7xl mx-auto px-6 py-12 md:py-20 lg:py-28 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 md:space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary bg-opacity-10 text-secondary text-xs font-bold uppercase tracking-wider">
+                    Secure Student Transit
+                </div>
+                
+                <h1 class="text-primary text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1]">
+                    Personal Guardianship for Every <span class="text-secondary">School Journey</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-[#44474e] max-w-xl leading-relaxed">
+                    Empowering parents with ownership and real-time control over their child's safety. Experience the peace of mind that comes from total oversight.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <button class="bg-primary text-white px-8 py-3 rounded-md font-medium shadow-lg shadow-blue-900/20 hover:bg-opacity-90 btn-transition">Get Started</button>
+                    <button class="border border-[#191c1e] text-[#191c1e] hover:bg-gray-100 px-8 py-3 rounded-md font-medium flex items-center gap-2 btn-transition">
+                        <i data-lucide="play-circle" class="w-5 h-5"></i>
+                        See How It Works
+                    </button>
+                </div>
+            </div>
+            
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-primary opacity-5 rounded-[2rem] transform rotate-3 transition-transform group-hover:rotate-1"></div>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                    <!-- Replace 'input_file_0.png' with your actual hero image filename on cPanel -->
+                    <img src="/input_file_0.png" alt="Safe school transport journey" class="w-full h-auto object-cover" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="bg-[#f2f4f6] py-20 px-6">
+            <div class="max-w-7xl mx-auto text-center space-y-16">
+                <div class="space-y-4 max-w-2xl mx-auto">
+                    <h2 class="text-primary text-3xl font-semibold">The MyEduRide Philosophy</h2>
+                    <p class="text-[#44474e] text-lg">Built on three core pillars that redefine the standard of student transportation security.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-white rounded-lg shadow-ambient p-8 hover:-translate-y-1 btn-transition">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mb-6">
+                            <i data-lucide="lock" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <h3 class="text-[#191c1e] text-2xl font-semibold mb-4">Ownership</h3>
+                        <p class="text-[#44474e] leading-relaxed">We put the power back in parents' hands. Every aspect of the route, driver credentials, and timing is transparent and manageable by you.</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-ambient p-8 hover:-translate-y-1 btn-transition">
+                        <div class="w-12 h-12 rounded-full bg-secondary bg-opacity-10 flex items-center justify-center mb-6">
+                            <i data-lucide="graduation-cap" class="w-6 h-6 text-secondary"></i>
+                        </div>
+                        <h3 class="text-[#191c1e] text-2xl font-semibold mb-4">The Child's World</h3>
+                        <p class="text-[#44474e] leading-relaxed">Education is more than just the classroom. We ensure the transition between home and school is a safe extension of their learning environment.</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-ambient p-8 hover:-translate-y-1 btn-transition">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mb-6">
+                            <i data-lucide="bus" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <h3 class="text-[#191c1e] text-2xl font-semibold mb-4">The Journey</h3>
+                        <p class="text-[#44474e] leading-relaxed">The path matters. Every kilometer is tracked, verified, and optimized to ensure the safest possible route is taken every single day.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="max-w-7xl mx-auto py-24 px-6 space-y-16">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div class="space-y-4 max-w-2xl">
+                    <h2 class="text-primary text-3xl font-semibold">Guardian-Grade Safety Features</h2>
+                    <p class="text-[#44474e] text-lg">Precision engineering for your peace of mind. Our system provides multiple layers of verification and alert systems.</p>
+                </div>
+                <div>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary bg-opacity-10 text-secondary font-semibold text-sm border border-secondary border-opacity-20">
+                        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                        LIVE SYSTEMS ACTIVE
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-ambient p-8 border border-gray-200 hover:-translate-y-1 btn-transition">
+                    <div class="mb-4">
+                        <i data-lucide="map-pin" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-[#191c1e]">GPS Tracking</h3>
+                    <p class="text-[#44474e] text-sm leading-relaxed">Real-time bus location updates every 5 seconds with precise mapping accuracy.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-ambient p-8 border border-gray-200 hover:-translate-y-1 btn-transition">
+                    <div class="mb-4">
+                        <i data-lucide="message-square" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-[#191c1e]">SMS Alerts</h3>
+                    <p class="text-[#44474e] text-sm leading-relaxed">Instant notifications for departures, arrivals, and any unexpected route deviations.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-ambient p-8 border border-gray-200 hover:-translate-y-1 btn-transition">
+                    <div class="mb-4">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-[#191c1e]">Driver Verification</h3>
+                    <p class="text-[#44474e] text-sm leading-relaxed">Vetted professionals with digital ID cards and live identity confirmation protocols.</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-ambient p-8 border border-gray-200 hover:-translate-y-1 btn-transition">
+                    <div class="mb-4">
+                        <i data-lucide="fingerprint" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-[#191c1e]">Biometric Check-ins</h3>
+                    <p class="text-[#44474e] text-sm leading-relaxed">Secure biometric school gate entry ensuring children are safely handed over.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proof -->
+        <section class="bg-primary text-white py-24 px-6 overflow-hidden">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-blue-500 opacity-20 blur-[100px] rounded-full"></div>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Dashboard UI" class="w-full h-auto rounded-2xl relative z-10 border border-white border-opacity-10 shadow-2xl" />
+                </div>
+                
+                <div class="space-y-10">
+                    <h2 class="text-4xl font-semibold">"Our technology is the proof."</h2>
+                    <p class="text-lg opacity-80 leading-relaxed">
+                        At the heart of MyEduRide lies our Central Policy Engine. This isn't just software—it's an automated enforcer of safety standards, ensuring that every trip complies with regional laws and parental preferences.
+                    </p>
+
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="mt-1 w-10 h-10 rounded-lg bg-white bg-opacity-10 flex items-center justify-center shrink-0">
+                                <i data-lucide="check-square" class="w-5 h-5 text-[#a2f79c]"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Compliance by Default</h3>
+                                <p class="opacity-70 text-sm leading-relaxed">Every route is automatically checked against the latest transport safety regulations.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="mt-1 w-10 h-10 rounded-lg bg-white bg-opacity-10 flex items-center justify-center shrink-0">
+                                <i data-lucide="activity" class="w-5 h-5 text-[#a2f79c]"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Self-Optimizing Routes</h3>
+                                <p class="opacity-70 text-sm leading-relaxed">Our engine predicts and avoids high-risk areas or traffic bottlenecks in real-time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-24 px-6 bg-[#f2f4f6] relative">
+            <div class="max-w-4xl mx-auto text-center bg-white rounded-3xl p-12 md:p-16 shadow-ambient relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-secondary bg-opacity-5 rounded-full blur-[40px]"></div>
+                
+                <div class="relative z-10 space-y-8">
+                    <h2 class="text-primary text-3xl font-semibold">Ready to take control of the journey?</h2>
+                    <p class="text-[#44474e] max-w-xl mx-auto text-lg leading-relaxed">
+                        Join thousands of proactive parents who trust MyEduRide to protect what matters most. Secure your child's transit today.
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center items-center gap-4 pt-4">
+                        <button class="bg-primary text-white hover:bg-opacity-90 px-6 py-3 rounded-md font-medium btn-transition">Create Guardian Account</button>
+                        <button class="border border-[#191c1e] text-[#191c1e] hover:bg-gray-100 px-6 py-3 rounded-md font-medium btn-transition">Contact Support</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 bg-white pt-16 pb-8 px-6 text-[#191c1e]">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <!-- Replace 'input_file_1.png' with your actual logo filename on cPanel -->
+                    <img src="/input_file_1.png" alt="MyEduRide Logo" class="h-8 w-auto object-contain" />
+                </div>
+                <p class="text-sm text-[#44474e] max-w-xs leading-relaxed">
+                    The Digital Guardian for Student Transport.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="font-semibold text-sm mb-4 uppercase tracking-wider text-primary">Platform</h4>
+                <ul class="space-y-3 text-sm text-[#44474e]">
+                    <li><a href="#" class="hover:text-primary transition-colors">Features</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Trust & Safety</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Parent Guide</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold text-sm mb-4 uppercase tracking-wider text-primary">Company</h4>
+                <ul class="space-y-3 text-sm text-[#44474e]">
+                    <li><a href="#" class="hover:text-primary transition-colors">Support</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Privacy</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold text-sm mb-4 uppercase tracking-wider text-primary">Newsletter</h4>
+                <p class="text-sm text-[#44474e] mb-4">Stay updated on safety standards.</p>
+                <form class="flex gap-2">
+                    <input type="email" placeholder="Email" class="flex-1 px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" />
+                    <button type="submit" class="bg-primary text-white p-2 text-sm rounded-md hover:bg-opacity-90 transition-opacity flex items-center justify-center w-12">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center text-sm text-[#74777f] border-t border-gray-200 pt-8">
+            &copy; <span id="year"></span> MyEduRide. The Digital Guardian for Student Transport.
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
