@@ -40,6 +40,568 @@
 </head>
 <body class="font-sans min-h-screen">
 
+    <!-- MyEduRide Interactive Website Preloader -->
+    <div id="myeduride-preloader">
+        <style>
+            #myeduride-preloader {
+                position: fixed;
+                inset: 0;
+                background-color: #f7f9fb;
+                background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+                background-size: 24px 24px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 999999;
+                overflow: hidden;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                opacity: 1;
+                transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            #myeduride-preloader .preloader-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                max-width: 480px;
+                padding: 24px;
+                box-sizing: border-box;
+                text-align: center;
+            }
+
+            /* Branding styles */
+            #myeduride-preloader .brand-container {
+                margin-bottom: 32px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                animation: preloader-fade-in 0.8s ease-out;
+            }
+
+            #myeduride-preloader .preloader-logo {
+                height: 48px;
+                width: auto;
+                object-contain: contain;
+                margin-bottom: 12px;
+                filter: drop-shadow(0 4px 6px rgba(0, 32, 70, 0.1));
+            }
+
+            #myeduride-preloader .logo-tagline {
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: 0.2em;
+                color: #002046;
+                text-transform: uppercase;
+                margin-top: 4px;
+                opacity: 0.8;
+            }
+
+            /* Perspective roadway scene container */
+            #myeduride-preloader .scene-container {
+                position: relative;
+                width: 100%;
+                height: 280px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                perspective: 600px;
+                perspective-origin: 50% 30%;
+                margin-bottom: 40px;
+                overflow: visible;
+            }
+
+            /* Forest/trees flanking the road */
+            #myeduride-preloader .trees-side {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 80px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                pointer-events: none;
+                z-index: 10;
+            }
+
+            #myeduride-preloader .trees-left {
+                left: 10px;
+            }
+
+            #myeduride-preloader .trees-right {
+                right: 10px;
+            }
+
+            #myeduride-preloader .tree {
+                width: 32px;
+                height: 64px;
+                position: absolute;
+                transform-origin: bottom center;
+            }
+
+            /* Perspective tree scaling based on distance */
+            #myeduride-preloader .tree-1 { top: 5%; left: 45px; transform: scale(0.5); opacity: 0.6; }
+            #myeduride-preloader .tree-2 { top: 42%; left: 25px; transform: scale(0.75); opacity: 0.85; }
+            #myeduride-preloader .tree-3 { top: 80%; left: 5px; transform: scale(1.1); opacity: 1; }
+
+            #myeduride-preloader .tree-4 { top: 5%; right: 45px; transform: scale(0.5); opacity: 0.6; }
+            #myeduride-preloader .tree-5 { top: 42%; right: 25px; transform: scale(0.75); opacity: 0.85; }
+            #myeduride-preloader .tree-6 { top: 80%; right: 5px; transform: scale(1.1); opacity: 1; }
+
+            /* 3D Perspective Roadway */
+            #myeduride-preloader .road-perspective-wrapper {
+                width: 240px;
+                height: 100%;
+                position: relative;
+                overflow: visible;
+            }
+
+            #myeduride-preloader .road-3d {
+                width: 100%;
+                height: 140%;
+                background-color: #2e3440; /* Deep anthracite road surface */
+                position: absolute;
+                top: -20%;
+                left: 0;
+                transform: rotateX(60deg);
+                transform-origin: top center;
+                border-left: 6px solid #e5e7eb;
+                border-right: 6px solid #e5e7eb;
+                overflow: hidden;
+                box-shadow: 0 20px 40px rgba(0, 32, 70, 0.15), inset 0 0 40px rgba(0,0,0,0.3);
+            }
+
+            /* Safe median divider (Green as seen in reference image) */
+            #myeduride-preloader .road-divider-green {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 12px;
+                transform: translateX(-50%);
+                background-color: #196d24;
+                border-left: 2px solid #ffffff;
+                border-right: 2px solid #ffffff;
+                box-shadow: 0 0 6px rgba(25, 109, 36, 0.4);
+            }
+
+            /* Flowing animated lane markings to simulate speed */
+            #myeduride-preloader .lane-lines-left {
+                position: absolute;
+                left: 25%;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: linear-gradient(to bottom, transparent 45%, #ffffff 45%, #ffffff 90%, transparent 90%);
+                background-size: 100% 48px;
+                animation: animate-lanes-downward 0.8s linear infinite;
+            }
+
+            #myeduride-preloader .lane-lines-right {
+                position: absolute;
+                right: 25%;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: linear-gradient(to top, transparent 45%, #ffffff 45%, #ffffff 90%, transparent 90%);
+                background-size: 100% 48px;
+                animation: animate-lanes-upward 0.8s linear infinite;
+            }
+
+            @keyframes animate-lanes-downward {
+                from { background-position-y: 0; }
+                to { background-position-y: 48px; }
+            }
+
+            @keyframes animate-lanes-upward {
+                from { background-position-y: 0; }
+                to { background-position-y: -48px; }
+            }
+
+            /* Directional Arrows in lanes */
+            #myeduride-preloader .road-arrow {
+                position: absolute;
+                width: 12px;
+                height: 18px;
+                opacity: 0.25;
+            }
+
+            #myeduride-preloader .arrow-down {
+                left: 12%;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>') no-repeat center;
+                background-size: contain;
+            }
+
+            #myeduride-preloader .arrow-up {
+                right: 12%;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>') no-repeat center;
+                background-size: contain;
+            }
+
+            #myeduride-preloader .arrow-pos-1 { top: 15%; }
+            #myeduride-preloader .arrow-pos-2 { top: 65%; }
+
+            /* Dynamic CSS Vehicles */
+            #myeduride-preloader .vehicle {
+                position: absolute;
+                width: 32px;
+                height: 64px;
+                left: 50%;
+                will-change: transform, opacity;
+            }
+
+            /* Downward vehicles occupy the LEFT side of the road */
+            #myeduride-preloader .v-downward {
+                margin-left: -76px; /* offset left from center */
+                animation: vehicle-running-down 4.2s cubic-bezier(0.1, 0.4, 0.8, 0.9) infinite;
+            }
+
+            /* Upward vehicles occupy the RIGHT side of the road */
+            #myeduride-preloader .v-upward {
+                margin-left: 44px; /* offset right from center */
+                animation: vehicle-running-up 4.5s cubic-bezier(0.15, 0.35, 0.8, 0.95) infinite;
+            }
+
+            /* Timing staggered offsets for organic stream flow */
+            #myeduride-preloader .yellow-school-bus { animation-delay: 0s; }
+            #myeduride-preloader .white-shuttle-van { animation-delay: 2.1s; }
+            #myeduride-preloader .private-bus { animation-delay: 0.9s; }
+            #myeduride-preloader .taxi-cab { animation-delay: 3.0s; }
+
+            /* Responsive hardware-accelerated movement loops */
+            @keyframes vehicle-running-down {
+                0% {
+                    transform: translateY(-80px) scale(0.38);
+                    opacity: 0;
+                }
+                12% {
+                    opacity: 1;
+                }
+                88% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(340px) scale(1.35);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes vehicle-running-up {
+                0% {
+                    transform: translateY(340px) scale(1.35);
+                    opacity: 0;
+                }
+                12% {
+                    opacity: 1;
+                }
+                88% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-80px) scale(0.38);
+                    opacity: 0;
+                }
+            }
+
+            /* Progress Bar Styling */
+            #myeduride-preloader .progress-container {
+                width: 100%;
+                max-width: 340px;
+                margin-top: 10px;
+                text-align: center;
+                animation: preloader-fade-in 1.0s ease-out;
+            }
+
+            #myeduride-preloader .progress-bar-wrapper {
+                position: relative;
+                width: 100%;
+                height: 12px;
+                background-color: #cbd5e1;
+                border-radius: 9999px;
+                overflow: visible;
+                border: 3px solid #ffffff;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 32, 70, 0.05);
+                margin-bottom: 14px;
+            }
+
+            #myeduride-preloader .progress-fill {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, #196d24 0%, #002046 100%);
+                border-radius: 9999px;
+                width: 0%;
+                animation: progress-fill-anim 3.0s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+
+            /* Road marker slide linked perfectly with the loader bar progress styling */
+            #myeduride-preloader .progress-road-icon {
+                position: absolute;
+                top: 50%;
+                left: 0%;
+                width: 26px;
+                height: 26px;
+                background-color: #ffffff;
+                border-radius: 50%;
+                box-shadow: 0 3px 8px rgba(0, 32, 70, 0.25);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: translate(-50%, -50%);
+                animation: progress-icon-anim 3.0s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                border: 2px solid #002046;
+                z-index: 10;
+            }
+
+            #myeduride-preloader .progress-road-icon svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            #myeduride-preloader .progress-text {
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                color: #002046;
+                opacity: 0.7;
+            }
+
+            @keyframes progress-fill-anim {
+                0% { width: 0%; }
+                100% { width: 100%; }
+            }
+
+            @keyframes progress-icon-anim {
+                0% { left: 0%; }
+                100% { left: 100%; }
+            }
+
+            @keyframes preloader-fade-in {
+                from { opacity: 0; transform: translateY(12px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        </style>
+
+        <div class="preloader-content">
+            <!-- Branding Logo and Titles -->
+            <div class="brand-container">
+                <img src="logo.png" alt="MyEduRide Logo" class="preloader-logo" />
+                <div class="logo-tagline">The Student Safety Platform</div>
+            </div>
+
+            <!-- Stylized Perspective Animation Highway -->
+            <div class="scene-container">
+                <!-- Left Flanking Forest Trees -->
+                <div class="trees-side trees-left">
+                    <div class="tree tree-1">
+                        <svg viewBox="0 0 40 80" class="w-full h-full">
+                            <rect x="18" y="54" width="4" height="14" rx="1" fill="#78350f" />
+                            <circle cx="20" cy="22" r="13" fill="#15803d" />
+                            <circle cx="14" cy="35" r="14" fill="#166534" />
+                            <circle cx="26" cy="35" r="14" fill="#15803d" />
+                            <circle cx="20" cy="46" r="16" fill="#14532d" />
+                        </svg>
+                    </div>
+                    <div class="tree tree-2">
+                        <svg viewBox="0 0 40 80" class="w-full h-full">
+                            <rect x="18" y="54" width="4" height="14" rx="1" fill="#78350f" />
+                            <circle cx="20" cy="22" r="13" fill="#15803d" />
+                            <circle cx="14" cy="35" r="14" fill="#166534" />
+                            <circle cx="26" cy="35" r="14" fill="#15803d" />
+                            <circle cx="20" cy="46" r="16" fill="#14532d" />
+                        </svg>
+                    </div>
+                    <div class="tree tree-3">
+                        <svg viewBox="0 0 40 80" class="w-full h-full">
+                            <rect x="18" y="54" width="4" height="14" rx="1" fill="#78350f" />
+                            <circle cx="20" cy="22" r="13" fill="#15803d" />
+                            <circle cx="14" cy="35" r="14" fill="#166534" />
+                            <circle cx="26" cy="35" r="14" fill="#15803d" />
+                            <circle cx="20" cy="46" r="16" fill="#14532d" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- 3D Road wrapper -->
+                <div class="road-perspective-wrapper">
+                    <div class="road-3d">
+                        <!-- Left & Right Lane Divider median -->
+                        <div class="road-divider-green"></div>
+
+                        <!-- Inside Lanes dashed lines -->
+                        <div class="lane-lines-left"></div>
+                        <div class="lane-lines-right"></div>
+
+                        <!-- Static Perspective road navigation direction arrows -->
+                        <div class="road-arrow arrow-down arrow-pos-1"></div>
+                        <div class="road-arrow arrow-down arrow-pos-2"></div>
+                        <div class="road-arrow arrow-up arrow-pos-1"></div>
+                        <div class="road-arrow arrow-up arrow-pos-2"></div>
+
+                        <!-- Vehicles stream -->
+                        <!-- Downward stream (Left lane) -->
+                        <div class="vehicle v-downward yellow-school-bus">
+                            <svg viewBox="0 0 40 80" width="100%" height="100%">
+                                <rect x="2" y="16" width="3" height="10" rx="1" fill="#0f172a"/>
+                                <rect x="35" y="16" width="3" height="10" rx="1" fill="#0f172a"/>
+                                <rect x="2" y="54" width="3" height="12" rx="1" fill="#0f172a"/>
+                                <rect x="35" y="54" width="3" height="12" rx="1" fill="#0f172a"/>
+                                <rect x="4" y="6" width="32" height="68" rx="5" fill="#f59e0b"/>
+                                <rect x="6" y="58" width="28" height="16" rx="3" fill="#d97706"/>
+                                <rect x="6" y="48" width="28" height="8" rx="1.5" fill="#0f172a"/>
+                                <rect x="6" y="12" width="3" height="6" rx="1" fill="#334155"/>
+                                <rect x="6" y="20" width="3" height="6" rx="1" fill="#334155"/>
+                                <rect x="6" y="28" width="3" height="6" rx="1" fill="#334155"/>
+                                <rect x="31" y="12" width="3" height="6" rx="1" fill="#334155"/>
+                                <rect x="31" y="20" width="3" height="6" rx="1" fill="#334155"/>
+                                <rect x="31" y="28" width="3" height="6" rx="1" fill="#334155"/>
+                                <rect x="14" y="20" width="12" height="8" rx="1.5" fill="#ea580c"/>
+                                <rect x="14" y="34" width="12" height="8" rx="1.5" fill="#ea580c"/>
+                                <circle cx="10" cy="72" r="2.5" fill="#fef08a"/>
+                                <circle cx="30" cy="72" r="2.5" fill="#fef08a"/>
+                                <rect x="8" y="6" width="5" height="2" rx="0.5" fill="#ef4444"/>
+                                <rect x="27" y="6" width="5" height="2" rx="0.5" fill="#ef4444"/>
+                            </svg>
+                        </div>
+
+                        <div class="vehicle v-downward white-shuttle-van">
+                            <svg viewBox="0 0 36 72" width="100%" height="100%">
+                                <rect x="2" y="14" width="2" height="8" rx="1" fill="#0f172a"/>
+                                <rect x="32" y="14" width="2" height="8" rx="1" fill="#0f172a"/>
+                                <rect x="2" y="50" width="2" height="10" rx="1" fill="#0f172a"/>
+                                <rect x="32" y="50" width="2" height="10" rx="1" fill="#0f172a"/>
+                                <rect x="3" y="4" width="30" height="64" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+                                <rect x="6" y="48" width="24" height="8" rx="1.5" fill="#1e293b"/>
+                                <rect x="8" y="7" width="20" height="3" rx="1" fill="#1e293b"/>
+                                <rect x="4" y="16" width="2" height="10" rx="1" fill="#475569"/>
+                                <rect x="30" y="16" width="2" height="10" rx="1" fill="#475569"/>
+                                <rect x="4" y="30" width="2" height="10" rx="1" fill="#475569"/>
+                                <rect x="30" y="30" width="2" height="10" rx="1" fill="#475569"/>
+                                <rect x="11" y="18" width="14" height="22" rx="2" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+                                <circle cx="8" cy="65" r="2" fill="#fffbeb"/>
+                                <circle cx="28" cy="65" r="2" fill="#fffbeb"/>
+                            </svg>
+                        </div>
+
+                        <!-- Upward stream (Right lane) -->
+                        <div class="vehicle v-upward private-bus">
+                            <svg viewBox="0 0 38 76" width="100%" height="100%">
+                                <rect x="1" y="14" width="3" height="10" rx="1" fill="#0f172a"/>
+                                <rect x="34" y="14" width="3" height="10" rx="1" fill="#0f172a"/>
+                                <rect x="1" y="52" width="3" height="12" rx="1" fill="#0f172a"/>
+                                <rect x="34" y="52" width="3" height="12" rx="1" fill="#0f172a"/>
+                                <rect x="3" y="4" width="32" height="68" rx="5" fill="#475569"/>
+                                <rect x="5" y="10" width="28" height="8" rx="1.5" fill="#0f172a"/>
+                                <line x1="8" y1="24" x2="8" y2="58" stroke="#334155" stroke-width="1.5"/>
+                                <line x1="30" y1="24" x2="30" y2="58" stroke="#334155" stroke-width="1.5"/>
+                                <rect x="13" y="24" width="12" height="7" rx="1" fill="#1e293b" opacity="0.6"/>
+                                <rect x="13" y="38" width="12" height="7" rx="1" fill="#1e293b" opacity="0.6"/>
+                                <rect x="13" y="52" width="12" height="7" rx="1" fill="#1e293b" opacity="0.6"/>
+                                <circle cx="8" cy="6" r="2" fill="#fef08a"/>
+                                <circle cx="30" cy="6" r="2" fill="#fef08a"/>
+                                <rect x="6" y="70" width="5" height="2" rx="0.5" fill="#ef4444"/>
+                                <rect x="27" y="70" width="5" height="2" rx="0.5" fill="#ef4444"/>
+                            </svg>
+                        </div>
+
+                        <div class="vehicle v-upward taxi-cab">
+                            <svg viewBox="0 0 34 62" width="100%" height="100%">
+                                <rect x="1" y="10" width="2" height="8" rx="1" fill="#0f172a"/>
+                                <rect x="31" y="10" width="2" height="8" rx="1" fill="#0f172a"/>
+                                <rect x="1" y="44" width="2" height="8" rx="1" fill="#0f172a"/>
+                                <rect x="31" y="44" width="2" height="8" rx="1" fill="#0f172a"/>
+                                <rect x="2" y="4" width="30" height="54" rx="8" fill="#1e293b"/>
+                                <rect x="10" y="22" width="14" height="20" rx="2" fill="#eab308"/>
+                                <rect x="12" y="25" width="10" height="5" rx="1" fill="#1e293b"/>
+                                <text x="13" y="29" font-family="sans-serif" font-weight="900" font-size="4px" fill="#eab308">TAXI</text>
+                                <path d="M 5 20 Q 17 18 29 20 L 26 14 L 8 14 Z" fill="#0f172a"/>
+                                <path d="M 5 44 Q 17 46 29 44 L 26 49 L 8 49 Z" fill="#0f172a"/>
+                                <circle cx="7" cy="5" r="2" fill="#fef08a"/>
+                                <circle cx="27" cy="5" r="2" fill="#fef08a"/>
+                                <path d="M 9 6 L 25 6 L 23 12 L 11 12 Z" fill="#eab308"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Flanking Forest Trees -->
+                <div class="trees-side trees-right">
+                    <div class="tree tree-4">
+                        <svg viewBox="0 0 40 80" class="w-full h-full">
+                            <rect x="18" y="54" width="4" height="14" rx="1" fill="#78350f" />
+                            <circle cx="20" cy="22" r="13" fill="#15803d" />
+                            <circle cx="14" cy="35" r="14" fill="#166534" />
+                            <circle cx="26" cy="35" r="14" fill="#15803d" />
+                            <circle cx="20" cy="46" r="16" fill="#14532d" />
+                        </svg>
+                    </div>
+                    <div class="tree tree-5">
+                        <svg viewBox="0 0 40 80" class="w-full h-full">
+                            <rect x="18" y="54" width="4" height="14" rx="1" fill="#78350f" />
+                            <circle cx="20" cy="22" r="13" fill="#15803d" />
+                            <circle cx="14" cy="35" r="14" fill="#166534" />
+                            <circle cx="26" cy="35" r="14" fill="#15803d" />
+                            <circle cx="20" cy="46" r="16" fill="#14532d" />
+                        </svg>
+                    </div>
+                    <div class="tree tree-6">
+                        <svg viewBox="0 0 40 80" class="w-full h-full">
+                            <rect x="18" y="54" width="4" height="14" rx="1" fill="#78350f" />
+                            <circle cx="20" cy="22" r="13" fill="#15803d" />
+                            <circle cx="14" cy="35" r="14" fill="#166534" />
+                            <circle cx="26" cy="35" r="14" fill="#15803d" />
+                            <circle cx="20" cy="46" r="16" fill="#14532d" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horizontal Load Progress meter with matching perspective icon -->
+            <div class="progress-container">
+                <div class="progress-bar-wrapper">
+                    <div class="progress-fill"></div>
+                    <div class="progress-road-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 22L8 2h8l4 20H4zm6-2h4v-3h-4v3zm.8-6h2.4v-3h-2.4v3zm.6-6h1.2V5h-1.2v3z" fill="#002046"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="progress-text">LOADING STUDENT SAFETY DATA...</div>
+            </div>
+        </div>
+
+        <script>
+            // Store dynamic start time to guarantee user experiences the aesthetic loaded scene transitions
+            window.preloaderStartTime = Date.now();
+
+            function dismissPreloader() {
+                const preloader = document.getElementById('myeduride-preloader');
+                if (!preloader) return;
+                
+                const minimumDisplayDuration = 2500; // guarantee a neat window frame (2.5 seconds)
+                const elapsed = Date.now() - window.preloaderStartTime;
+                const balanceRemaining = Math.max(0, minimumDisplayDuration - elapsed);
+
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 600);
+                }, balanceRemaining);
+            }
+
+            // Bind trigger states correctly safely for immediate rendering
+            if (document.readyState === 'complete') {
+                dismissPreloader();
+            } else {
+                window.addEventListener('load', dismissPreloader);
+            }
+        </script>
+    </div>
+
     <!-- Navbar -->
     <nav class="w-full h-20 border-b border-gray-200 bg-[#f7f9fb] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
